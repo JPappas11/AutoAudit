@@ -14,6 +14,7 @@ agent any
             steps {
             echo 'Test Stage'
             dir('backend-api') {
+                bat 'uv sync --all-extras'
                 bat 'uv run pytest --junitxml=results.xml'
             }
         }
@@ -22,16 +23,7 @@ agent any
         stage('Code Quality') {
             steps {
             echo 'Code Quality'
-            dir('backend-api') {
-                    withCredentials([string(credentialsId:'jpappas11', variable:'jpappas11')]) {
-                    powershell '''
-                         Invoke-WebRequest -Uri "https://binaries.sonarsource.com/Distribution/sonar-scanner-cli/sonar-scanner-cli-8.1.0.6389-windows-x64.zip" -OutFile "sonar-scanner.zip" 
-                         Expand-archive -Path "sonar-scanner.zip" -DestinationPath "." -Force
-                         $scannerPath = Join-Path $PWD "sonar-scanner-8.1.0.6389-windows-x64\\bin\\sonar-scanner.bat"
-                         & $scannerPath "-Dsonar.token=$env:jpappas11" "-Dsonar.organization=jpappas11" "-Dsonar.projectKey=JPappas11_AutoAudit" "-Dsonar.sources=." -X
-                        '''
-                    }
-                }
+       
             }
         }
         stage('Security') {
