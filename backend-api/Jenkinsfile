@@ -13,8 +13,12 @@ agent any
         stage('Test') {
             steps {
             echo 'Test Stage'
+            dir('backend-api') {
+                bat 'uv run pytest --junitxml=results.xml'
             }
         }
+    }
+    
         stage('Code Quality') {
             steps {
             echo 'Code Quality'
@@ -41,4 +45,9 @@ agent any
             }
         }
     }
+    post {
+        always {
+            junit 'backend-api/results.xml'
+            }
+        }
 }
