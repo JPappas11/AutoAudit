@@ -38,6 +38,10 @@ agent any
         stage('Security') {
             steps {
             echo 'Security Stage'
+            dir('backend-api') {
+                bat 'uv sync --all-extras'
+                bat "uv run bandit -r app -f json -o bandit-report.json"
+            }
             }
         }
         stage('Deploy') {
