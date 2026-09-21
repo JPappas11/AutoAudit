@@ -5,7 +5,8 @@ agent any
             steps {
             echo 'Build Stage'
                 script {
-                customImage = docker.build("autoaudit-backend:${env.BUILD_ID}", "./backend-api")
+                customImage = docker.build("autoaudit-backend:${env.BUILD_ID}", 
+                "-f backend-api/Dockerfile. ")
                 }
             } 
         }       
