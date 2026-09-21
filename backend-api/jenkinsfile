@@ -1,0 +1,40 @@
+pipeline {
+agent any
+    stages {
+        stage('Build') {
+            steps {
+            echo 'Build Stage'
+            }
+        }
+        stage('Test') {
+            steps {
+            echo 'Test Stage'
+            }
+        }
+        stage('Code Quality') {
+            steps {
+            echo 'Code Quality'
+            }
+        }
+        stage('Security') {
+            steps {
+            echo 'Secuirty Stage'
+            }
+        }
+        stage('Deploy') {
+            steps {
+            echo 'Deploy Stage'
+            }
+        }
+        stage('Release') {
+            steps {
+            echo 'Release Stage'
+            }
+        }
+        stage('Monitoring') {
+            steps {
+            echo 'Monitoring Stage'
+            }
+        }
+    }
+}
